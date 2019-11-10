@@ -21,6 +21,26 @@
     ubuntu_font_family
   ];
 
+  environment.variables = {
+    EDITOR = "vim";
+    BROWSER = "firefox";
+    TERMINAL = "termite";
+  };
+
+  environment.shellAliases = {
+    b = "cd ..";
+    bb = "cd ../..";
+    q = "exit";
+
+    dots = "cd ~/.dotfiles";
+    drop = "cd ~/Dropbox";
+
+    mkdir = "mkdir -p";
+    rm = "rm -i";
+    mv = "mv -i";
+    cp = "cp -i";
+  };
+
   environment.systemPackages = with pkgs; [
     acpi
     arandr
@@ -107,8 +127,8 @@
 
       displayManager = {
         #lightdm.enable = true;
-	gdm.enable = true;
-	gdm.wayland = false;
+        gdm.enable = true;
+        gdm.wayland = false;
       };
 
       desktopManager.gnome3.enable = true;
