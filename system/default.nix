@@ -1,16 +1,6 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [
-   # Add home-manager module
-    "${
-      builtins.fetchGit {
-        ref = "release-19.09";
-        url = "https://github.com/rycee/home-manager";
-      }
-    }/nixos"
- ];
-
   time.timeZone = "Europe/Berlin";
 
   documentation.man.enable = true;
@@ -37,9 +27,13 @@
     coreutils
     curl
     dropbox-cli
+    file
+    firefox
     fish
     git
     htop
+    pavucontrol
+    stow
     termite
     tmux
     tree
@@ -80,13 +74,6 @@
         "$6$VZg0KLhSW4Iquocr$D1bfuJp02pQgF9jUnH5/e.9wMBAv1AY5HCtP.uIJpcCtYEccPcnOiZJGdeEXg7myo.3LmQfX.W5smOs8OtDh41";
       shell = pkgs.fish;
     };
-    mutableUsers = false;
-  };
-
-  home-manager.users.waynee95 = { pkgs, ...}: {
-    imports = [
-      ../home
-    ];
   };
 
   systemd.user.services.dropbox = {
@@ -118,14 +105,10 @@
       enable = true;
       layout = "de";
 
-      libinput = {
-        enable = true;
-        naturalScrolling = true;
-      };
-
       displayManager = {
-        gdm.enable = true;
-        gdm.wayland = false;
+        #lightdm.enable = true;
+	gdm.enable = true;
+	gdm.wayland = false;
       };
 
       desktopManager.gnome3.enable = true;
@@ -134,6 +117,9 @@
       windowManager.stumpwm.enable = true;
     };
   };
+
+  # See https://nixos.wiki/Gnome
+  services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
 
   system = {
     autoUpgrade = {
@@ -144,3 +130,4 @@
   };
 
 }
+

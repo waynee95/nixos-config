@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
-    /etc/nixos/hardware-configuration.nix 
+  imports = [
+    /etc/nixos/hardware-configuration.nix
     ../system
   ];
 
@@ -22,6 +22,11 @@
 
   services = {
     acpid.enable = true;
+
+    libinput = {
+      enable = true;
+      naturalScrolling = true;
+    };
 
     thinkfan = {
       enable = true;
