@@ -55,6 +55,8 @@
     fish
     git
     htop
+    pandoc
+    texlive.combined.scheme-medium
     pavucontrol
     scrot
     steam
