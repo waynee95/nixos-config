@@ -56,6 +56,8 @@
     git
     htop
     pavucontrol
+    scrot
+    steam
     stow
     termite
     tmux
@@ -64,6 +66,7 @@
     vim_configurable
     wget
     xclip
+    youtube-dl
     zip
   ];
 
