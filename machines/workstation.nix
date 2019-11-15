@@ -8,7 +8,7 @@
   networking = {
     hostName = "waynee95-pc";
     useDHCP = false;
-    interfaces.enp0s25.useDHCP = true;
+    interfaces.enp0s31f6.useDHCP = true;
   };
 
 }
