@@ -1,6 +1,9 @@
 { pkgs, lib, ... }:
 
 {
+  # Splash image instead of log messages
+  boot.plymouth.enable = true;
+
   time.timeZone = "Europe/Berlin";
 
   documentation.man.enable = true;
