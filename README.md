@@ -12,7 +12,9 @@
 
 ## Setup
 
-```bash
+After installing NixOS, clone this repository.
+
+```
 rm /etc/nixos/configuration.nix
 ln -s /<path_to_config>/nixos-config/machines/<name>/configuration.nix /etc/nixos/configuration.nix
 nixos-rebuild switch
