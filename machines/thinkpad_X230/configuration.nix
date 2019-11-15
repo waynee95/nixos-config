@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ /etc/nixos/hardware-configuration.nix ../system ];
+  imports = [ /etc/nixos/hardware-configuration.nix ../../system ];
 
   boot.loader.grub.device = "/dev/sda";
 
