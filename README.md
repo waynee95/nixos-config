@@ -17,6 +17,8 @@ TODO
 ## Inspired by
 
 - https://github.com/sondr3/dotfiles
+- https://github.com/davidak/nixos-config
+- https://github.com/macalinao/dotfiles
 
 ## License
 
