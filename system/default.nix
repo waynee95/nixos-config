@@ -132,7 +132,6 @@
       layout = "de";
 
       displayManager = {
-        #lightdm.enable = true;
         gdm.enable = true;
         gdm.wayland = false;
       };
@@ -154,5 +153,4 @@
       dates = "16:00";
     };
   };
-
 }
