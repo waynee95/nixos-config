@@ -11,4 +11,8 @@
     interfaces.enp0s31f6.useDHCP = true;
   };
 
+  hardware = {
+    opengl.driSupport32Bit = true;
+    pulseaudio.support32Bit = true;
+  };
 }
