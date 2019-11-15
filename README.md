@@ -13,10 +13,12 @@
 ## Setup
 
 ```bash
-# rm /etc/nixos/configuration.nix
-# ln -s /<path_to_config>/nixos-config/machines/<name>/configuration.nix /etc/nixos/configuration.nix
-# nixos-rebuild switch
+rm /etc/nixos/configuration.nix
+ln -s /<path_to_config>/nixos-config/machines/<name>/configuration.nix /etc/nixos/configuration.nix
+nixos-rebuild switch
 ```
+
+Run as root or using `sudo`.
 
 ## Inspired by
 
