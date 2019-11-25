@@ -1,6 +1,10 @@
 { pkgs, lib, ... }:
 
 {
+  # See https://github.com/NixOS/nixpkgs/issues/43461#issuecomment-554528899
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+
   # Splash image instead of log messages
   boot.plymouth.enable = true;
 
