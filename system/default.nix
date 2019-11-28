@@ -54,10 +54,11 @@
     coreutils
     curl
     dropbox-cli
+    entr
     file
     firefox
     fish
-    git
+    gitAndTools.gitFull
     htop
     pandoc
     texlive.combined.scheme-medium
