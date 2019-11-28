@@ -150,14 +150,6 @@
     };
   };
 
-  # Steam
-  hardware = {
-    opengl.driSupport32Bit = true;
-    opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    pulseaudio.support32Bit = true;
-    pulseaudio.package = pkgs.pulseaudioFull;
-  };
-
   # See https://nixos.wiki/Gnome
   services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
 
