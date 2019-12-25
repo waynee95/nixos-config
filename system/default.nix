@@ -60,6 +60,7 @@
     fish
     gitAndTools.gitFull
     htop
+    megatools
     pandoc
     texlive.combined.scheme-medium
     pavucontrol
@@ -69,6 +70,7 @@
     termite
     tmux
     tree
+    unrar
     unzip
     vim_configurable
     wget
