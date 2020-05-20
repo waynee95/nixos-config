@@ -50,6 +50,7 @@
 
   environment.systemPackages = with pkgs; [
     acpi
+    appimage-run
     arandr
     coreutils
     curl
@@ -59,6 +60,7 @@
     firefox
     fish
     gitAndTools.gitFull
+    haskellPackages.nixfmt
     htop
     megatools
     pandoc
@@ -149,6 +151,8 @@
       desktopManager.xterm.enable = false;
 
       windowManager.stumpwm.enable = true;
+
+      wacom.enable = true;
     };
   };
 
