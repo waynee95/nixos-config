@@ -9,6 +9,9 @@
     hostName = "waynee95-pc";
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp0s20f0u8.useDHCP = true;
+    wireless.enable = true;
+    networkmanager.enable = false;
   };
 
   # Steam

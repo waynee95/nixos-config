@@ -5,9 +5,9 @@
 ## System Setup
 
 - **wm** [stumpwm](https://stumpwm.github.io/)
-- **terminal** termite together with tmux
+- **terminal** kitty together with tmux
 - **browser** firefox
-- **shell** fish with [pure.fish](https://github.com/brandonweiss/pure.fish)
+- **shell** zshell with [common](https://github.com/jackharrisonsherlock/common)
 - **editor** vim
 
 ## Setup
@@ -27,6 +27,7 @@ Run as root or using `sudo`.
 - https://github.com/sondr3/dotfiles
 - https://github.com/davidak/nixos-config
 - https://github.com/macalinao/dotfiles
+- https://github.com/MatthiasBenaets/nixos-config
 
 ## License
 

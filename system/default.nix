@@ -159,10 +159,16 @@
   # See https://nixos.wiki/Gnome
   services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
 
+  virtualisation.docker.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "waynee95" ];
+
   system = {
     autoUpgrade = {
       enable = true;
-      channel = "https://nixos.org/channels/nixos-19.09";
+      channel = "https://nixos.org/channels/nixos-20.03";
       dates = "16:00";
     };
   };
