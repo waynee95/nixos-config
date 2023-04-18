@@ -179,11 +179,5 @@
     };
   };
 
-  virtualisation.docker.enable = true;
-
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "waynee95" ];
-
   system.stateVersion = "22.11";
 }
