@@ -12,26 +12,31 @@
 
   documentation.man.enable = true;
 
-  i18n = {
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "de";
 
-  nix = { autoOptimiseStore = true; };
+  nix.settings.auto-optimise-store = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
 
   fonts.fonts = with pkgs; [
     corefonts
-    hack-font
     liberation_ttf
     ubuntu_font_family
+    julia-mono
+    nerdfonts
   ];
 
   environment.variables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
     BROWSER = "firefox";
-    TERMINAL = "termite";
+    TERMINAL = "kitty";
   };
 
   environment.shellAliases = {
@@ -49,39 +54,57 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
     acpi
     appimage-run
     arandr
+    aspell
     coreutils
     curl
+    discord
     dropbox-cli
     entr
     file
     firefox
-    fish
+    fzf
     gitAndTools.gitFull
     haskellPackages.nixfmt
     htop
+    kitty
     megatools
     pandoc
-    texlive.combined.scheme-medium
+    # texlive.combined.scheme-medium
+    (texlive.combine { inherit (texlive) scheme-medium enumitem; })
     pavucontrol
     scrot
-    steam
     stow
-    termite
+    subversion
     tmux
     tree
     unrar
     unzip
-    vim_configurable
     wget
     xclip
+    haskellPackages.xmobar
     youtube-dl
     zip
   ];
 
-  programs.vim.defaultEditor = true;
+  programs.zsh.enable = true;
+
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    configure = {
+      customRC = ''
+        luafile ${/home/waynee95/.config/nvim/init.lua}
+      '';
+    };
+  };
 
   sound.enable = true;
 
@@ -106,10 +129,10 @@
       isNormalUser = true;
       createHome = true;
       home = "/home/waynee95";
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" ];
       hashedPassword =
         "$6$VZg0KLhSW4Iquocr$D1bfuJp02pQgF9jUnH5/e.9wMBAv1AY5HCtP.uIJpcCtYEccPcnOiZJGdeEXg7myo.3LmQfX.W5smOs8OtDh41";
-      shell = pkgs.fish;
+      shell = pkgs.zsh;
     };
   };
 
@@ -147,17 +170,14 @@
         gdm.wayland = false;
       };
 
-      desktopManager.gnome3.enable = true;
-      desktopManager.xterm.enable = false;
+      desktopManager.gnome.enable = true;
 
-      windowManager.stumpwm.enable = true;
+      windowManager.xmonad.enable = true;
+      windowManager.xmonad.enableContribAndExtras = true;
 
       wacom.enable = true;
     };
   };
-
-  # See https://nixos.wiki/Gnome
-  services.dbus.packages = with pkgs; [ gnome3.dconf gnome2.GConf ];
 
   virtualisation.docker.enable = true;
 
@@ -165,11 +185,5 @@
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "waynee95" ];
 
-  system = {
-    autoUpgrade = {
-      enable = true;
-      channel = "https://nixos.org/channels/nixos-20.03";
-      dates = "16:00";
-    };
-  };
+  system.stateVersion = "22.11";
 }

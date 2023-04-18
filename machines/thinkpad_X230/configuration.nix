@@ -5,17 +5,8 @@
 
   boot.loader.grub.device = "/dev/sda";
 
-  # See https://www.systutorials.com/docs/linux/man/5-wpa_supplicant.conf/
-  networking = {
-    hostName = "waynee95-thinkpad";
-    networkmanager.enable = false;
-    wireless.enable = true;
-    useDHCP = false;
-    interfaces = {
-      enp0s25.useDHCP = true;
-      wlp3s0.useDHCP = true;
-    };
-  };
+  networking.hostName = "waynee95-thinkpad";
+  networking.networkmanager.enable = true;
 
   services = {
     acpid.enable = true;
