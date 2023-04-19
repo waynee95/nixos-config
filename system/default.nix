@@ -20,9 +20,10 @@
 
   nixpkgs.config = { allowUnfree = true; };
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
+    nur = import (builtins.fetchTarball
+      "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+        inherit pkgs;
+      };
   };
 
   fonts.fonts = with pkgs; [
@@ -75,7 +76,10 @@
     megatools
     pandoc
     # texlive.combined.scheme-medium
-    (texlive.combine { inherit (texlive) scheme-medium enumitem; })
+    (texlive.combine {
+      inherit (texlive)
+        scheme-medium enumitem wrapfig tcolorbox environ diagbox pict2e;
+    })
     pavucontrol
     scrot
     stow
