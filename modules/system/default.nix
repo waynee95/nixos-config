@@ -26,7 +26,8 @@ in
   console.keyMap = "de";
   services.xserver.xkb = {
     layout = "de";
-    variant = "";
+    # otherwise we need to press twice for e.g. `
+    variant = "nodeadkeys";
   };
 
   documentation.man.enable = true;
