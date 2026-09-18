@@ -24,13 +24,9 @@ modules/home/                       # home-manager user config
 After installing NixOS, clone this repository.
 
 ```
-sudo cp /etc/nixos/hardware-configuration.nix hosts/thinkpad_X230/hardware-configuration.nix
-sudo nixos-rebuild switch --flake .#thinkpad_X230
+sudo cp /etc/nixos/hardware-configuration.nix hosts/<machine>/hardware-configuration.nix
+sudo nixos-rebuild switch --flake .#<machine>
 ```
-
-## Machines
-
-- **thinkpad_X230** - ThinkPad X230 (waynee95-thinkpad)
 
 ## License
 
