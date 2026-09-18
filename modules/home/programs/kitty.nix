@@ -14,6 +14,8 @@
       url_style = "single";
       open_url_modifiers = "ctrl";
       enable_audio_bell = "no";
+      # use XWayland in order to make wacom pen work
+      linux_display_server = "x11";
 
       # hyper-snazzy colorscheme
       foreground = "#eff0eb";
