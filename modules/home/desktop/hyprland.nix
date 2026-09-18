@@ -240,7 +240,8 @@
       input = {
         kb_layout       = "de",
         follow_mouse    = 1,
-        natural_scroll  = true, # mouse
+        -- mouse natural scrolling
+        natural_scroll  = true,
         touchpad = {
           natural_scroll       = true,
           disable_while_typing = true,
