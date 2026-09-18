@@ -107,6 +107,10 @@ in
         # disable picture-in-picture toggle button on videos
         "media.videocontrols.picture-in-picture.video-toggling.enabled" = false;
 
+        # disable translation popup
+        "browser.translations.enable" = false;
+        "browser.translations.automaticallyPopup" = false;
+
         # no search suggestions
         "browser.search.suggest.enabled" = false;
         "browser.urlbar.suggest.searches" = false;

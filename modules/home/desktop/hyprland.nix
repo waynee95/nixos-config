@@ -238,8 +238,9 @@
       },
 
       input = {
-        kb_layout    = "de",
-        follow_mouse = 1,
+        kb_layout       = "de",
+        follow_mouse    = 1,
+        natural_scroll  = true, # mouse
         touchpad = {
           natural_scroll       = true,
           disable_while_typing = true,
