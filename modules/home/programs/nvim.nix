@@ -228,7 +228,11 @@
         },
 
         -- diffview
-        { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" } },
+        {
+          "sindrets/diffview.nvim",
+          cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
+          keys = { { "q", "<cmd>DiffviewClose<CR>", desc = "Close diffview" } },
+        },
 
         -- oil (file explorer)
         {
