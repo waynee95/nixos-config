@@ -55,7 +55,7 @@
       decoration = {
         rounding         = 4,
         active_opacity   = 1.0,
-        inactive_opacity = 0.9,
+        inactive_opacity = 1.0,
         shadow = {
           enabled      = true,
           range        = 4,
@@ -181,7 +181,6 @@
 
     -- window rules
     hl.window_rule({ match = { class = "xdg-desktop-portal" }, suppress_event = "maximize" })
-    hl.window_rule({ match = { class = "^(firefox)$" }, opacity = "0.9 0.9" })
     hl.window_rule({ match = { class = "^(HotKeyHub|hotkeyhub)$" }, float = true, center = true, size = { 1200, 800 } })
 
     -- fix bitwarden's passkey selection window not being centered and not floating
