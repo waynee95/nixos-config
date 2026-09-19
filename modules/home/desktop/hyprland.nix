@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./random-wallpaper.nix
+    ./swayosd.nix
+    ./hyprlock.nix
+    ./hypridle.nix
+  ];
+
   home.packages = with pkgs; [
     swaybg
     hyprlock
@@ -12,188 +19,12 @@
     libnotify
   ];
 
-  # pick a random wallpaper from ~/Pictures/Wallpapers on every login
-  home.file.".local/bin/random-wallpaper.sh" = {
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      set -euo pipefail
-
-      wallpaper_dir="''${WALLPAPER_DIR:-$HOME/Pictures/Wallpapers}"
-      state_file="''${XDG_CACHE_HOME:-$HOME/.cache}/swaybg/last"
-
-      [[ -d "$wallpaper_dir" ]] || exit 0
-
-      mapfile -t candidates < <(
-        ${pkgs.findutils}/bin/find "$wallpaper_dir" -type f \( \
-          -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o \
-          -iname "*.webp" -o -iname "*.bmp" \
-        \) -print 2>/dev/null
-      )
-
-      [[ ''${#candidates[@]} -eq 0 ]] && exit 0
-
-      mkdir -p "$(dirname "$state_file")"
-      last="$(cat "$state_file" 2>/dev/null || true)"
-
-      # avoid showing the same wallpaper twice in a row
-      if [[ ''${#candidates[@]} -gt 1 && -n "$last" ]]; then
-        pool=()
-        for f in "''${candidates[@]}"; do
-          [[ "$f" != "$last" ]] && pool+=("$f")
-        done
-        [[ ''${#pool[@]} -gt 0 ]] && candidates=("''${pool[@]}")
-      fi
-
-      wall="$(printf '%s\n' "''${candidates[@]}" | ${pkgs.coreutils}/bin/shuf -n 1)"
-
-      # swaybg has no runtime control, so restart it with the new image
-      ${pkgs.procps}/bin/pkill -x swaybg 2>/dev/null || true
-      ${pkgs.swaybg}/bin/swaybg -i "$wall" -m fill &
-
-      printf '%s\n' "$wall" > "$state_file"
-    '';
-  };
-
-  services.swayosd = {
-    enable = true;
-    topMargin = 0.9;
-    stylePath = pkgs.writeText "swayosd-style.css" ''
-      window#osd {
-        border: 2px solid #ffffff;
-        border-radius: 8px;
-        background: #000000;
-      }
-
-      window#osd #container {
-        margin: 16px;
-      }
-
-      window#osd image,
-      window#osd label {
-        color: #ffffff;
-      }
-
-      window#osd progressbar,
-      window#osd segmentedprogress {
-        min-height: 6px;
-        border: none;
-        border-radius: 0;
-        background: transparent;
-      }
-
-      window#osd trough,
-      window#osd segment {
-        min-height: inherit;
-        border: 1px solid #ffffff;
-        border-radius: 0;
-        background: #000000;
-      }
-
-      window#osd progress,
-      window#osd segment.active {
-        min-height: inherit;
-        border: none;
-        border-radius: 0;
-        background: #ffffff;
-      }
-    '';
-  };
-
   systemd.user.targets.hyprland-session.Unit = {
     Description = "Hyprland session";
     BindsTo = [ "graphical-session.target" ];
     Wants = [ "graphical-session-pre.target" ];
     After = [ "graphical-session-pre.target" ];
   };
-
-  # hyprlock: display time using english formatting
-  home.file.".config/hypr/hyprlock.conf".text = ''
-    general {
-      hide_cursor = true
-    }
-
-    background {
-      color = rgb(282a36)
-    }
-
-    input-field {
-      size = 300, 50
-      position = 0, -80
-      halign = center
-      valign = center
-      inner_color = rgb(282a36)
-      font_color = rgb(eff0eb)
-      outline_thickness = 2
-      outer_color = rgb(57c7ff)
-      rounding = 4
-      placeholder_text = Password
-    }
-
-    label {
-      text = $TIME
-      font_size = 64
-      font_family = FiraCode Nerd Font
-      color = rgb(eff0eb)
-      position = 0, 120
-      halign = center
-      valign = center
-    }
-
-    # cmd label: LC_TIME=C forces English day/month names.
-    label {
-      text = cmd[update:1000] LC_TIME=C date '+%A, %d %B %Y'
-      font_size = 20
-      font_family = FiraCode Nerd Font
-      color = rgb(eff0eb)
-      position = 0, 60
-      halign = center
-      valign = center
-    }
-  '';
-
-  home.file.".config/hypr/hypridle.conf".text = ''
-    general {
-        # avoid starting multiple hyprlock instances
-        lock_cmd = pidof hyprlock || hyprlock
-        # lock before suspend
-        before_sleep_cmd = loginctl lock-session
-        # to avoid having to press a key twice to turn on the display
-        after_sleep_cmd = hyprctl dispatch dpms on
-    }
-
-    listener {
-        # 2.5 minutes
-        timeout = 150
-        # set monitor backlight to minimum, avoid 0 on OLED monitor
-        on-timeout = brightnessctl -s set 10
-        # monitor backlight restore
-        on-resume = brightnessctl -r
-    }
-
-    listener {
-        # 5min
-        timeout = 300
-        # lock screen when timeout has passed
-        on-timeout = loginctl lock-session
-    }
-
-    listener {
-        # 5.5min
-        timeout = 330
-        # screen off when timeout has passed
-        on-timeout = hyprctl dispatch dpms off
-        # screen on when activity is detected after timeout has fired
-        on-resume = hyprctl dispatch dpms on && brightnessctl -r
-    }
-
-    listener {
-        # 30min
-        timeout = 1800
-        # suspend pc
-        on-timeout = systemctl suspend
-    }
-  '';
 
   home.file.".config/hypr/hyprland.lua".text = ''
     local mainMod = "SUPER"
