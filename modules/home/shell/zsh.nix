@@ -51,7 +51,7 @@
       "--layout=reverse"
       "--border"
     ];
-    fileWidgetOptions = [
+    fileWidget.options = [
       "--preview '${pkgs.ripgrep}/bin/rg --hidden --pretty --context 0 {2..}'"
     ];
   };
