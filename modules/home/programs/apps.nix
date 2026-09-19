@@ -1,5 +1,19 @@
 { inputs, pkgs, ... }:
 
+let
+  unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
+  # see https://discourse.nixos.org/t/opencode-server-error-workaround/80088
+  bun_1_3_13 = unstablePkgs.bun.overrideAttrs (old: rec {
+    version = "1.3.13";
+    src = unstablePkgs.fetchurl {
+      url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64-baseline.zip";
+      hash = "sha256-nYokKSpwaAkCBdqsCloiP19pc29Sh+N7+I07QDHtx1A=";
+    };
+  });
+
+  opencode = unstablePkgs.opencode.override { bun = bun_1_3_13; };
+in
 {
   home.packages =
     with pkgs;
@@ -13,8 +27,8 @@
       dropbox
     ]
     ++ [
-      inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode
-      inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.codex
+      opencode
+      unstablePkgs.codex
     ];
 
   # start dropbox via systemd user service on login
