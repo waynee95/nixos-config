@@ -13,6 +13,7 @@
     ./programs/scripts.nix
     ./desktop/hyprland.nix
     ./desktop/gnome.nix
+    ./desktop/dconf.nix
     ./desktop/waybar.nix
   ];
 

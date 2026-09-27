@@ -41,6 +41,8 @@
   };
 
   hardware.graphics.enable = true;
+  # see https://wiki.nixos.org/wiki/AMD_GPU#Troubleshooting
+  hardware.amdgpu.initrd.enable = true;
 
   system.stateVersion = "26.05";
 }

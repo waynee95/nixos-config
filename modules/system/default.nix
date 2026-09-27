@@ -166,6 +166,8 @@ in
 
   programs.zsh.enable = true;
 
+  programs.dconf.enable = true;
+
   environment.shellAliases = {
     b = "cd ..";
     bb = "cd ../..";
