@@ -137,6 +137,12 @@
     hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }),   { description = "Focus up" })
     hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }), { description = "Focus right" })
 
+    -- move windows (swap with neighbour in direction)
+    hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "left"  }), { description = "Move window left" })
+    hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down"  }), { description = "Move window down" })
+    hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "up"    }), { description = "Move window up" })
+    hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }), { description = "Move window right" })
+
     -- switch workspaces
     for i = 1, 5 do
       hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
