@@ -21,6 +21,9 @@
   home.homeDirectory = "/home/waynee95";
   home.stateVersion = "26.05";
 
+  # make sure Screenshots directory exists
+  home.file."Pictures/Screenshots/.keep".text = "";
+
   # see https://github.com/nix-community/home-manager
   programs.home-manager.enable = true;
 }
