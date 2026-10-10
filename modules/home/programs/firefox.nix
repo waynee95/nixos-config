@@ -107,6 +107,10 @@ in
         # disable picture-in-picture toggle button on videos
         "media.videocontrols.picture-in-picture.video-toggling.enabled" = false;
 
+        # open PDFs in Firefox instead of downloading them
+        "browser.download.open_pdf_attachments_inline" = true;
+        "pdfjs.disabled" = false;
+
         # disable translation popup
         "browser.translations.enable" = false;
         "browser.translations.automaticallyPopup" = false;
