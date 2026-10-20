@@ -14,18 +14,26 @@
     };
 
     initContent = ''
-      source ~/.zsh/prompt.zsh
-      bindkey -e
-      bindkey '^A' beginning-of-line
-      bindkey '^K' kill-line
-      bindkey -r '^T'
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[[B' history-substring-search-down
-
       # auto start tmux if not already in a tmux session
       if { [[ -z ''$TMUX ]] } && { [[ -z ''$SSH_CLIENT ]] }; then
         exec tmux new-session -A -s main
       fi
+
+      source ~/.zsh/prompt.zsh
+      bindkey -e
+
+      # ctrl key bindings
+      bindkey '^A' beginning-of-line 
+      bindkey '^K' kill-line         
+      bindkey -r '^T'                
+
+      # home and end key bindings
+      bindkey '^[[1~' beginning-of-line
+      bindkey '^[[4~' end-of-line 
+
+      # history search up and down arrow
+      bindkey '^[[A' history-beginning-search-backward
+      bindkey '^[[B' history-beginning-search-forward
     '';
   };
 
@@ -34,11 +42,6 @@
       name = "fzf-tab";
       src = pkgs.zsh-fzf-tab;
       file = "share/fzf-tab/fzf-tab.plugin.zsh";
-    }
-    {
-      name = "history-substring-search";
-      src = pkgs.zsh-history-substring-search;
-      file = "share/zsh-history-substring-search/zsh-history-substring-search.plugin.zsh";
     }
   ];
 
