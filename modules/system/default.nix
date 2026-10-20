@@ -136,7 +136,7 @@ in
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # enable gnome keyring for password management for git
+  # unlock gnome keyring on login
   security.pam.services.gdm-password.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
@@ -155,7 +155,7 @@ in
     htop
     pandoc
     pavucontrol
-    subversion
+    (pkgs.callPackage ../../pkgs/subversion.nix { })
     tmux
     tree
     unrar

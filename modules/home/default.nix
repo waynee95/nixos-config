@@ -4,6 +4,7 @@
   imports = [
     ./shell/zsh.nix
     ./programs/git.nix
+    ./programs/svn.nix
     ./programs/firefox.nix
     ./programs/apps.nix
     ./programs/kitty.nix
