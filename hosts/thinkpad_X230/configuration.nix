@@ -14,6 +14,7 @@
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
+  boot.kernelParams = [ "cfg80211.ieee80211_regdom=DE" ];
 
   networking.hostName = "waynee95-thinkpad";
   networking.networkmanager.enable = true;
